@@ -7,14 +7,19 @@ import CountryPicker from "./components/CountryPicker/CountryPicker";
 import styles from "../src/App.module.css";
 import { fechtData } from "./api";
 class App extends React.Component {
+  state = {
+    data: {},
+  };
   async componentDidMount() {
-    const data = await fechtData();
-    console.log("dasda", data);
+    const fecthData = await fechtData();
+    this.setState({ data: fecthData });
   }
   render() {
+    const { data } = this.state;
+    // console.log("dasad", data);
     return (
       <div className={styles.container}>
-        <Cards />
+        <Cards data={data} />
         <CountryPicker />
         <Chart />
       </div>
